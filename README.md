@@ -2,8 +2,8 @@
 
 English-only version of the local `vinir_pro` chatbot, using Next.js, React, and Mistral.
 The chat interface, admin interface, API messages, and assistant instructions are in English.
-The original profile image and layout are preserved. The original welcome audio is omitted
-because no English recording was provided.
+The original profile image and layout are preserved. The voice note at `public/welcome.ogg`
+appears immediately after the welcome message, with play/pause, seeking, and 1x, 1.5x, 2x playback.
 
 ## Run locally
 

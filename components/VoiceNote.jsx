@@ -33,6 +33,7 @@ export default function VoiceNote({ src }) {
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [speedIndex, setSpeedIndex] = useState(0);
+  const [error, setError] = useState('');
   const speed = SPEEDS[speedIndex];
 
   useEffect(() => {
@@ -41,37 +42,36 @@ export default function VoiceNote({ src }) {
 
     const onTimeUpdate = () => setCurrentTime(audio.currentTime);
     const onLoadedMetadata = () => setDuration(audio.duration);
-    const onEnded = () => { setIsPlaying(false); setCurrentTime(0); };
+    const onEnded = () => { audio.currentTime = 0; setCurrentTime(0); setIsPlaying(false); };
+    const onPlay = () => { setIsPlaying(true); setError(''); };
+    const onPause = () => setIsPlaying(false);
+    const onError = () => { setIsPlaying(false); setError('Unable to play this voice note. Please try again.'); };
 
     audio.addEventListener('timeupdate', onTimeUpdate);
     audio.addEventListener('loadedmetadata', onLoadedMetadata);
     audio.addEventListener('ended', onEnded);
+    audio.addEventListener('play', onPlay);
+    audio.addEventListener('pause', onPause);
+    audio.addEventListener('error', onError);
 
     return () => {
       audio.removeEventListener('timeupdate', onTimeUpdate);
       audio.removeEventListener('loadedmetadata', onLoadedMetadata);
       audio.removeEventListener('ended', onEnded);
+      audio.removeEventListener('play', onPlay);
+      audio.removeEventListener('pause', onPause);
+      audio.removeEventListener('error', onError);
     };
   }, []);
 
   const togglePlay = () => {
     const audio = audioRef.current;
     if (!audio) return;
-    if (isPlaying) {
+    if (!audio.paused) {
       audio.pause();
     } else {
-      audio.play().catch(() => {});
+      audio.play().catch(() => setError('Unable to play this voice note. Please try again.'));
     }
-    setIsPlaying(!isPlaying);
-  };
-
-  const handleSeek = (e) => {
-    const audio = audioRef.current;
-    if (!audio || !duration) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const ratio = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
-    audio.currentTime = ratio * duration;
-    setCurrentTime(audio.currentTime);
   };
 
   const cycleSpeed = () => {
@@ -80,9 +80,8 @@ export default function VoiceNote({ src }) {
     if (audioRef.current) audioRef.current.playbackRate = SPEEDS[nextIndex];
   };
 
-  const progressPct = duration ? (currentTime / duration) * 100 : 0;
-
   return (
+    <div>
     <div className="flex items-center gap-2.5 min-w-55">
       <audio ref={audioRef} src={src} preload="metadata" />
       <button
@@ -95,15 +94,22 @@ export default function VoiceNote({ src }) {
       </button>
 
       <div className="flex-1 min-w-0">
-        <div
-          onClick={handleSeek}
-          className="h-1.5 rounded-full cursor-pointer overflow-hidden bg-gray-300 dark:bg-gray-700"
-        >
-          <div
-            className="h-full rounded-full bg-green-500"
-            style={{ width: `${progressPct}%` }}
-          />
-        </div>
+        <input
+          type="range"
+          min="0"
+          max={Number.isFinite(duration) && duration > 0 ? duration : 0}
+          step="0.1"
+          value={currentTime}
+          disabled={!Number.isFinite(duration) || duration <= 0}
+          onChange={(e) => {
+            if (!audioRef.current) return;
+            const time = Number(e.target.value);
+            audioRef.current.currentTime = time;
+            setCurrentTime(time);
+          }}
+          aria-label="Voice note progress"
+          className="block w-full h-1.5 accent-green-500 cursor-pointer"
+        />
         <p className="text-[11px] mt-1 text-gray-500 dark:text-gray-400">
           {formatTime(currentTime)} / {formatTime(duration)}
         </p>
@@ -118,6 +124,8 @@ export default function VoiceNote({ src }) {
       >
         {speed}x
       </button>
+    </div>
+    {error && <p role="alert" className="text-xs text-red-500 mt-2">{error}</p>}
     </div>
   );
 }
