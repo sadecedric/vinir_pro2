@@ -87,7 +87,7 @@ export default function VoiceNote({ src }) {
       <button
         type="button"
         onClick={togglePlay}
-        className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white bg-green-500 hover:bg-green-400 active:bg-green-600 transition-colors"
+        className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white bg-rose-500 hover:bg-rose-400 active:bg-rose-600 transition-colors"
         aria-label={isPlaying ? 'Pause' : 'Play'}
       >
         {isPlaying ? <PauseIcon /> : <PlayIcon />}
@@ -108,9 +108,9 @@ export default function VoiceNote({ src }) {
             setCurrentTime(time);
           }}
           aria-label="Voice note progress"
-          className="block w-full h-1.5 accent-green-500 cursor-pointer"
+          className="block w-full h-1.5 accent-rose-500 cursor-pointer"
         />
-        <p className="text-[11px] mt-1 text-gray-500 dark:text-gray-400">
+        <p className="text-[11px] mt-1 text-slate-500 dark:text-slate-400">
           {formatTime(currentTime)} / {formatTime(duration)}
         </p>
       </div>
@@ -118,7 +118,7 @@ export default function VoiceNote({ src }) {
       <button
         type="button"
         onClick={cycleSpeed}
-        className="shrink-0 px-2 py-1 rounded-full text-[11px] font-bold text-green-500 bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700"
+        className="shrink-0 px-2 py-1 rounded-full text-[11px] font-bold text-rose-500 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700"
         aria-label="Change playback speed"
         title="Playback speed"
       >

@@ -54,19 +54,19 @@ export default function Header({ isDark, onToggleTheme }) {
   const router = useRouter();
 
   return (
-    <header className="shrink-0 flex items-center gap-3 px-4 py-3 bg-gray-900 border-b border-gray-700 shadow-md z-10 relative">
+    <header className="shrink-0 flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-slate-950 via-slate-900 to-rose-950 border-b border-rose-400/20 shadow-lg z-10 relative">
       <div className="relative shrink-0">
         <img
           src={PROFILE_IMAGE}
           alt={ASSISTANT_NAME}
-          className="w-11 h-11 rounded-full object-cover ring-2 ring-green-500"
+          className="w-11 h-11 rounded-full object-cover ring-2 ring-rose-400 ring-offset-2 ring-offset-slate-900"
           onError={(e) => {
             e.target.onerror = null;
             e.target.src =
-              "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='24' fill='%2316a34a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' fill='white' font-size='18' font-family='sans-serif' font-weight='bold'%3EV2%3C/text%3E%3C/svg%3E";
+              "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='24' fill='%2316a34a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' fill='white' font-size='18' font-family='sans-serif' font-weight='bold'%3EIF%3C/text%3E%3C/svg%3E";
           }}
         />
-        <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full ring-2 ring-gray-900" />
+        <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 rounded-full ring-2 ring-slate-900" />
       </div>
 
       <div className="flex-1 min-w-0">
@@ -74,15 +74,15 @@ export default function Header({ isDark, onToggleTheme }) {
           {ASSISTANT_NAME}
         </p>
         <div className="flex items-center gap-1.5 mt-0.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-          <span className="text-xs text-green-400 font-medium">Online</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="text-xs text-emerald-400 font-medium">Online</span>
         </div>
       </div>
 
       {/* Theme toggle */}
       <button
         onClick={onToggleTheme}
-        className="p-2 rounded-full text-gray-400 hover:text-white hover:bg-gray-700 transition-colors shrink-0"
+        className="p-2 rounded-full text-slate-400 hover:text-white hover:bg-slate-700 transition-colors shrink-0"
         aria-label="Toggle theme"
       >
         {isDark ? <SunIcon /> : <MoonIcon />}
@@ -92,8 +92,8 @@ export default function Header({ isDark, onToggleTheme }) {
       <button
         type="button"
         onClick={() => setMenuOpen((v) => !v)}
-        className="shrink-0 flex items-center justify-center w-9 h-9 rounded-xl transition-colors text-gray-400 hover:text-white hover:bg-gray-700"
-        style={{ background: menuOpen ? 'rgba(22,163,74,0.12)' : undefined }}
+        className="shrink-0 flex items-center justify-center w-9 h-9 rounded-xl transition-colors text-slate-400 hover:text-white hover:bg-slate-700"
+        style={{ background: menuOpen ? 'rgba(244,63,94,0.12)' : undefined }}
         aria-label="Menu"
       >
         {menuOpen ? <CloseIcon /> : <BurgerIcon />}
@@ -101,13 +101,13 @@ export default function Header({ isDark, onToggleTheme }) {
 
       {/* Dropdown menu */}
       {menuOpen && (
-        <div className="absolute top-full right-3 mt-2 w-52 rounded-xl overflow-hidden z-50 bg-gray-900 border border-gray-700 shadow-xl">
+        <div className="absolute top-full right-3 mt-2 w-52 rounded-xl overflow-hidden z-50 bg-slate-900 border border-slate-700 shadow-xl">
           <button
             type="button"
             onClick={() => { setMenuOpen(false); router.push('/admin'); }}
-            className="flex items-center gap-3 w-full px-4 py-3 text-sm text-left text-gray-300 hover:bg-gray-800 hover:text-white transition-colors"
+            className="flex items-center gap-3 w-full px-4 py-3 text-sm text-left text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"
           >
-            <span className="text-green-500"><LockIcon /></span>{' '}
+            <span className="text-rose-500"><LockIcon /></span>{' '}
             Admin login
           </button>
         </div>

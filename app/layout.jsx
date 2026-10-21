@@ -1,10 +1,11 @@
 import './globals.css';
+import { ASSISTANT_NAME, PROFILE_IMAGE } from '@/lib/config';
 
 export const metadata = {
-  title: 'VINIR_PRO2 Assistant',
-  description: 'Official VINIR_PRO2 community assistant',
+  title: `${ASSISTANT_NAME} Assistant`,
+  description: `Official ${ASSISTANT_NAME} community assistant`,
   icons: {
-    icon: '/vinir.jpg',
+    icon: PROFILE_IMAGE,
   },
 };
 

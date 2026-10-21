@@ -69,12 +69,12 @@ export default function Page() {
   };
 
   return (
-    <div className={isDark ? 'dark' : ''}>
-      <div className="flex flex-col h-dvh max-w-md mx-auto bg-gray-100 dark:bg-gray-950 text-gray-900 dark:text-white overflow-hidden">
+    <div className={`app-backdrop ${isDark ? 'dark' : ''}`}>
+      <div className="chat-shell flex flex-col h-dvh max-w-md mx-auto text-slate-900 dark:text-white overflow-hidden">
 
         <Header isDark={isDark} onToggleTheme={() => setIsDark((d) => !d)} />
 
-        <main className="flex-1 overflow-y-auto min-h-0 px-3 py-4 space-y-3">
+        <main className="chat-timeline flex-1 overflow-y-auto min-h-0 px-4 py-5 space-y-4">
           <ChatBubble sender="assistant" text={WELCOME_MESSAGE} />
 
           <ChatBubble sender="assistant">
@@ -88,9 +88,9 @@ export default function Page() {
           {isLoading && (
             <ChatBubble sender="assistant">
               <span className="flex gap-1 items-center py-0.5">
-                <span className="w-2 h-2 rounded-full bg-gray-400 dark:bg-gray-500 animate-bounce [animation-delay:0ms]" />
-                <span className="w-2 h-2 rounded-full bg-gray-400 dark:bg-gray-500 animate-bounce [animation-delay:150ms]" />
-                <span className="w-2 h-2 rounded-full bg-gray-400 dark:bg-gray-500 animate-bounce [animation-delay:300ms]" />
+                <span className="w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-500 animate-bounce [animation-delay:0ms]" />
+                <span className="w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-500 animate-bounce [animation-delay:150ms]" />
+                <span className="w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-500 animate-bounce [animation-delay:300ms]" />
               </span>
             </ChatBubble>
           )}
@@ -98,7 +98,7 @@ export default function Page() {
           <div ref={bottomRef} />
         </main>
 
-        <div className="flex-shrink-0 bg-gray-100 dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800">
+        <div className="flex-shrink-0 bg-rose-50/90 dark:bg-slate-950/95 border-t border-rose-100 dark:border-slate-800">
           <PlatformsCard />
           <ChatInput onSend={handleSend} disabled={isLoading} />
         </div>

@@ -1,4 +1,4 @@
-# VINIR_PRO2
+# Ingrid foot ❤️⚽️
 
 English-only version of the local `vinir_pro` chatbot, using Next.js, React, and Mistral.
 The chat interface, admin interface, API messages, and assistant instructions are in English.
@@ -19,7 +19,7 @@ Use a separate database to keep this project's conversations independent.
 
 ## Official information
 
-- Name: VINIR_PRO2
+- Name: Ingrid foot ❤️⚽️
 - Promo code: ZT255
 - WhatsApp: https://whatsapp.com/channel/0029Vb6XBJX5K3zVtLnJWm40
 - 1XBET: https://reffpa.com/L?tag=d_5083416m_45361c_ZT255&site=5083416&ad=45361
@@ -34,3 +34,5 @@ are inherited from `vinir_pro`: $10 or 5,000 CFA francs minimum.
 
 Run `npm run build`, then `npm start` to serve the production build.
 AI replies require a valid Mistral key and network access.
+
+The displayed brand is Ingrid foot, with a rose/pink accent palette, midnight-blue surfaces, and a patterned chat background. The project directory and Git remote remain independent in VINIR_PRO2.

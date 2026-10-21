@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { ASSISTANT_NAME } from '@/lib/config';
 
 function StatCard({ label, value, sub }) {
   return (
-    <div className="rounded-xl p-4 bg-gray-900 border border-gray-700">
-      <p className="text-[10px] uppercase tracking-widest mb-1 text-green-600">{label}</p>
+    <div className="rounded-xl p-4 bg-slate-900 border border-slate-700">
+      <p className="text-[10px] uppercase tracking-widest mb-1 text-rose-600">{label}</p>
       <p className="text-2xl font-bold text-white">{value ?? '—'}</p>
-      {sub && <p className="text-xs mt-0.5 text-gray-500">{sub}</p>}
+      {sub && <p className="text-xs mt-0.5 text-slate-500">{sub}</p>}
     </div>
   );
 }
@@ -73,12 +74,12 @@ export default function Dashboard() {
   const goPage = (n) => { setPage(n); fetchConversations(n * PER_PAGE); setSelected(null); };
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white">
-      <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 bg-gray-900 border-b border-gray-700 shadow-md">
-        <p className="font-bold text-base text-white">VINIR_PRO2 — Admin</p>
+    <div className="min-h-screen bg-slate-950 text-white">
+      <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 bg-slate-900 border-b border-slate-700 shadow-md">
+        <p className="font-bold text-base text-white">{ASSISTANT_NAME} — Admin</p>
         <button
           onClick={logout}
-          className="text-xs px-3 py-1.5 rounded-lg text-green-400 bg-gray-800 border border-gray-700 hover:border-green-700 transition-colors"
+          className="text-xs px-3 py-1.5 rounded-lg text-rose-400 bg-slate-800 border border-slate-700 hover:border-rose-700 transition-colors"
         >
           Sign out
         </button>
@@ -99,47 +100,47 @@ export default function Dashboard() {
         )}
 
         <div className="flex gap-4" style={{ alignItems: 'flex-start' }}>
-          <div className="flex-1 min-w-0 rounded-2xl overflow-hidden bg-gray-900 border border-gray-700">
-            <div className="px-4 py-3 flex items-center justify-between border-b border-gray-700">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-green-600">Recent conversations</p>
-              <p className="text-xs text-gray-600">{total} total</p>
+          <div className="flex-1 min-w-0 rounded-2xl overflow-hidden bg-slate-900 border border-slate-700">
+            <div className="px-4 py-3 flex items-center justify-between border-b border-slate-700">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-rose-600">Recent conversations</p>
+              <p className="text-xs text-slate-600">{total} total</p>
             </div>
 
             {conversations.length === 0 ? (
-              <p className="text-sm text-center py-10 text-gray-600">No conversations yet.</p>
+              <p className="text-sm text-center py-10 text-slate-600">No conversations yet.</p>
             ) : conversations.map((c) => (
               <button
                 key={c.id}
                 onClick={() => openConversation(c.id)}
-                className="w-full text-left px-4 py-3 transition-colors border-b border-gray-800 last:border-b-0"
+                className="w-full text-left px-4 py-3 transition-colors border-b border-slate-800 last:border-b-0"
                 style={{
                   background: selected === c.id ? 'rgba(22,163,74,0.08)' : 'transparent',
                   borderLeft: selected === c.id ? '2px solid #16a34a' : '2px solid transparent',
                 }}
               >
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs font-mono text-green-600">{c.id.slice(0, 8)}…</span>
-                  <span className="text-[11px] text-gray-600">{formatDate(c.updated_at)}</span>
+                  <span className="text-xs font-mono text-rose-600">{c.id.slice(0, 8)}…</span>
+                  <span className="text-[11px] text-slate-600">{formatDate(c.updated_at)}</span>
                 </div>
-                <p className="text-sm text-gray-300 truncate">{c.first_message ?? '(empty)'}</p>
-                <p className="text-[11px] mt-0.5 text-gray-600">{c.message_count} messages</p>
+                <p className="text-sm text-slate-300 truncate">{c.first_message ?? '(empty)'}</p>
+                <p className="text-[11px] mt-0.5 text-slate-600">{c.message_count} messages</p>
               </button>
             ))}
 
             {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-2 px-4 py-3 border-t border-gray-800">
+              <div className="flex items-center justify-center gap-2 px-4 py-3 border-t border-slate-800">
                 <button
                   onClick={() => goPage(page - 1)}
                   disabled={page === 0}
-                  className="text-xs px-3 py-1 rounded-lg disabled:opacity-30 text-green-400 bg-gray-800"
+                  className="text-xs px-3 py-1 rounded-lg disabled:opacity-30 text-rose-400 bg-slate-800"
                 >
                   Previous
                 </button>
-                <span className="text-xs text-gray-600">{page + 1} / {totalPages}</span>
+                <span className="text-xs text-slate-600">{page + 1} / {totalPages}</span>
                 <button
                   onClick={() => goPage(page + 1)}
                   disabled={page >= totalPages - 1}
-                  className="text-xs px-3 py-1 rounded-lg disabled:opacity-30 text-green-400 bg-gray-800"
+                  className="text-xs px-3 py-1 rounded-lg disabled:opacity-30 text-rose-400 bg-slate-800"
                 >
                   Next
                 </button>
@@ -149,16 +150,16 @@ export default function Dashboard() {
 
           {selected && (
             <div
-              className="w-80 flex-shrink-0 rounded-2xl overflow-hidden bg-gray-900 border border-gray-700"
+              className="w-80 flex-shrink-0 rounded-2xl overflow-hidden bg-slate-900 border border-slate-700"
               style={{ maxHeight: '70vh', display: 'flex', flexDirection: 'column' }}
             >
-              <div className="px-4 py-3 flex items-center justify-between flex-shrink-0 border-b border-gray-700">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-green-600">Conversation</p>
-                <button onClick={() => setSelected(null)} className="text-gray-500 text-lg leading-none">×</button>
+              <div className="px-4 py-3 flex items-center justify-between flex-shrink-0 border-b border-slate-700">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-rose-600">Conversation</p>
+                <button onClick={() => setSelected(null)} className="text-slate-500 text-lg leading-none">×</button>
               </div>
               <div className="flex-1 overflow-y-auto p-3 space-y-2">
                 {loadingMsgs ? (
-                  <p className="text-sm text-center py-6 text-gray-600">Loading...</p>
+                  <p className="text-sm text-center py-6 text-slate-600">Loading...</p>
                 ) : messages.map((m, i) => (
                   <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                     <div
